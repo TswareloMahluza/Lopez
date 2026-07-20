@@ -1,0 +1,341 @@
+:root {
+  --bg-rose: #fff4ec;
+  --bg-cream: #fff9f3;
+  --ink: #3a2327;
+  --accent: #c2465e;
+  --accent-deep: #8b2748;
+  --accent-soft: #f7d8df;
+  --card: rgba(255, 255, 255, 0.85);
+  --shadow: rgba(139, 39, 72, 0.2);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 1.25rem;
+  color: var(--ink);
+  font-family: "Palatino Linotype", "Book Antiqua", Georgia, serif;
+  background: linear-gradient(160deg, var(--bg-rose), var(--bg-cream));
+  overflow-x: hidden;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background-image: url("Background.JPG");
+  background-repeat: repeat-x;
+  background-size: auto 100%;
+  background-position: 0 50%;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(circle at 20% 10%, rgba(255, 216, 199, 0.42) 0%, transparent 35%),
+    radial-gradient(circle at 80% 20%, rgba(255, 209, 220, 0.42) 0%, transparent 32%),
+    rgba(255, 249, 243, 0.5);
+}
+
+.background-glow {
+  position: fixed;
+  inset: 0;
+  background: repeating-radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.05),
+    rgba(255, 255, 255, 0.05) 8px,
+    transparent 8px,
+    transparent 24px
+  );
+  pointer-events: none;
+  z-index: 0;
+  animation: pulse 8s ease-in-out infinite;
+}
+
+.card {
+  position: relative;
+  z-index: 2;
+  width: min(820px, 100%);
+  background: var(--card);
+  backdrop-filter: blur(7px);
+  border: 1px solid rgba(194, 70, 94, 0.2);
+  border-radius: 24px;
+  box-shadow: 0 20px 50px var(--shadow);
+  padding: 2rem;
+  animation: riseIn 850ms cubic-bezier(.2,.9,.2,1) both;
+}
+
+.kicker {
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 0 0.4rem;
+  color: var(--accent-deep);
+  font-size: 0.82rem;
+}
+
+h1 {
+  margin: 0;
+  font-family: "Garamond", "Times New Roman", serif;
+  font-size: 25px;
+  line-height: 1.05;
+}
+
+.lead {
+  margin: 0.9rem 0 1.5rem;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.letter {
+  margin: 0.6rem 0 1.6rem;
+  padding: 1.2rem 1.1rem;
+  border-radius: 16px;
+  border: 1px solid rgba(194, 70, 94, 0.24);
+  background: linear-gradient(160deg, rgba(255, 247, 249, 0.95), rgba(255, 241, 244, 0.78));
+  box-shadow: 0 10px 26px rgba(139, 39, 72, 0.12);
+}
+
+.letter h2 {
+  margin: 0 0 0.7rem;
+  font-size: 1.55rem;
+  color: var(--accent-deep);
+}
+
+.letter p {
+  margin: 0;
+  line-height: 1.75;
+  font-size: 1.05rem;
+}
+
+.letter p + p {
+  margin-top: 0.9rem;
+}
+
+.letter p:first-of-type::first-letter {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: var(--accent-deep);
+  padding-right: 0.08em;
+  line-height: 1;
+}
+
+.appreciation h2 {
+  margin: 0 0 0.65rem;
+  font-size: 1.3rem;
+  color: var(--accent-deep);
+}
+
+.appreciation ul {
+  margin: 0;
+  padding-left: 1.2rem;
+  line-height: 1.7;
+  background: rgba(255, 255, 255, 0.62);
+  border: 1px solid rgba(194, 70, 94, 0.18);
+  border-radius: 14px;
+  padding: 0.8rem 0.95rem 0.8rem 2rem;
+}
+
+.gallery {
+  margin-top: 1.6rem;
+}
+
+.gallery h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.3rem;
+  color: var(--accent-deep);
+}
+
+.photo-grid {
+  position: relative;
+  width: min(540px, 100%);
+  margin: 0 auto;
+  height: 330px;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(194, 70, 94, 0.3);
+  box-shadow: 0 12px 28px rgba(139, 39, 72, 0.2);
+}
+
+.photo-card {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  opacity: 0;
+  transform: translateX(14px) scale(1.02);
+  transition: opacity 700ms ease, transform 700ms ease;
+  pointer-events: none;
+}
+
+.photo-card.is-active {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+  pointer-events: auto;
+}
+
+.photo-card img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photo-card:hover img {
+  transform: scale(1.04);
+}
+
+.notes {
+  margin-top: 1.6rem;
+  padding: 1.1rem;
+  border-radius: 16px;
+  background: linear-gradient(165deg, rgba(255, 244, 247, 0.88), rgba(255, 237, 241, 0.75));
+  border: 1px solid rgba(194, 70, 94, 0.2);
+}
+
+.love-note {
+  margin: 0 0 0.9rem;
+  min-height: 2.6em;
+  font-size: 1.1rem;
+  color: #d1457a;
+  transition: opacity 220ms ease;
+}
+
+button {
+  border: 0;
+  border-radius: 999px;
+  padding: 0.7rem 1.1rem;
+  font: inherit;
+  color: #fff;
+  background: linear-gradient(120deg, var(--accent), var(--accent-deep));
+  cursor: pointer;
+  transition: transform 200ms ease, box-shadow 200ms ease;
+  box-shadow: 0 8px 16px rgba(139, 39, 72, 0.3);
+}
+
+button:hover {
+  transform: translateY(-2px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+.signature {
+  margin: 1.5rem 0 0;
+  font-style: italic;
+  text-align: right;
+  color: var(--accent-deep);
+  font-size: 1.08rem;
+}
+
+.floating-hearts {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.heart {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: #e26d8a;
+  transform: rotate(45deg);
+  opacity: 0.7;
+  animation: floatUp linear forwards;
+}
+
+.heart::before,
+.heart::after {
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: inherit;
+  border-radius: 50%;
+}
+
+.heart::before {
+  left: -6px;
+}
+
+.heart::after {
+  top: -6px;
+}
+
+@keyframes floatUp {
+  from {
+    transform: translateY(0) rotate(45deg) scale(0.8);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.75;
+  }
+  to {
+    transform: translateY(-120vh) rotate(45deg) scale(1.25);
+    opacity: 0;
+  }
+}
+
+@keyframes riseIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@media (max-width: 600px) {
+  .card {
+    padding: 1.3rem;
+    border-radius: 18px;
+  }
+
+  .photo-grid {
+    height: 260px;
+  }
+
+  .photo-card img {
+    height: 100%;
+  }
+
+  .lead,
+  .love-note {
+    font-size: 1rem;
+  }
+
+  .letter {
+    padding: 1rem;
+  }
+
+  .letter h2 {
+    font-size: 1.35rem;
+  }
+
+  .letter p {
+    font-size: 1rem;
+  }
+}

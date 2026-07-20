@@ -1,12 +1,12 @@
 :root {
-  --bg-rose: #fff4ec;
-  --bg-cream: #fff9f3;
+  --bg-rose: #fef0eb;
+  --bg-cream: #fffaf7;
   --ink: #3a2327;
   --accent: #c2465e;
   --accent-deep: #8b2748;
   --accent-soft: #f7d8df;
-  --card: rgba(255, 255, 255, 0.85);
-  --shadow: rgba(139, 39, 72, 0.2);
+  --card: rgba(255, 255, 255, 0.18);
+  --shadow: rgba(139, 39, 72, 0.16);
 }
 
 * {
@@ -21,7 +21,7 @@ body {
   padding: 1.25rem;
   color: var(--ink);
   font-family: "Palatino Linotype", "Book Antiqua", Georgia, serif;
-  background: linear-gradient(160deg, var(--bg-rose), var(--bg-cream));
+  background: transparent;
   overflow-x: hidden;
   position: relative;
 }
@@ -32,9 +32,9 @@ body::before {
   inset: 0;
   z-index: -2;
   background-image: url("Background.JPG");
-  background-repeat: repeat-x;
-  background-size: auto 100%;
-  background-position: 0 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
 }
 
 body::after {
@@ -42,21 +42,16 @@ body::after {
   position: fixed;
   inset: 0;
   z-index: -1;
-  background: radial-gradient(circle at 20% 10%, rgba(255, 216, 199, 0.42) 0%, transparent 35%),
-    radial-gradient(circle at 80% 20%, rgba(255, 209, 220, 0.42) 0%, transparent 32%),
-    rgba(255, 249, 243, 0.5);
+  background: linear-gradient(180deg, rgba(255, 248, 246, 0.06), rgba(255, 240, 246, 0.18));
 }
 
 .background-glow {
   position: fixed;
   inset: 0;
-  background: repeating-radial-gradient(
-    circle at center,
-    rgba(255, 255, 255, 0.05),
-    rgba(255, 255, 255, 0.05) 8px,
-    transparent 8px,
-    transparent 24px
-  );
+  background:
+    radial-gradient(circle at 18% 20%, rgba(255, 214, 224, 0.18) 0%, transparent 22%),
+    radial-gradient(circle at 82% 16%, rgba(255, 207, 214, 0.12) 0%, transparent 24%),
+    radial-gradient(circle at 50% 85%, rgba(255, 236, 241, 0.12) 0%, transparent 28%);
   pointer-events: none;
   z-index: 0;
   animation: pulse 8s ease-in-out infinite;
@@ -65,14 +60,32 @@ body::after {
 .card {
   position: relative;
   z-index: 2;
-  width: min(820px, 100%);
-  background: var(--card);
-  backdrop-filter: blur(7px);
-  border: 1px solid rgba(194, 70, 94, 0.2);
-  border-radius: 24px;
-  box-shadow: 0 20px 50px var(--shadow);
-  padding: 2rem;
+  width: min(860px, 100%);
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.22), rgba(255, 244, 247, 0.14));
+  backdrop-filter: blur(12px) saturate(118%);
+  border: 1px solid rgba(194, 70, 94, 0.22);
+  border-radius: 30px;
+  box-shadow: 0 24px 60px rgba(114, 35, 60, 0.18);
+  padding: 2.2rem;
   animation: riseIn 850ms cubic-bezier(.2,.9,.2,1) both;
+  overflow: hidden;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.34), transparent 32%, rgba(255, 202, 216, 0.18) 68%, transparent);
+  pointer-events: none;
+}
+
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 22px;
+  pointer-events: none;
 }
 
 .kicker {
@@ -80,41 +93,48 @@ body::after {
   text-transform: uppercase;
   margin: 0 0 0.4rem;
   color: var(--accent-deep);
-  font-size: 0.82rem;
+  font-size: 0.78rem;
+  font-weight: 700;
 }
 
 h1 {
   margin: 0;
   font-family: "Garamond", "Times New Roman", serif;
-  font-size: 25px;
-  line-height: 1.05;
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
+  line-height: 1;
+  letter-spacing: 0.01em;
+  color: #6f213f;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.35);
 }
 
 .lead {
-  margin: 0.9rem 0 1.5rem;
-  font-size: 1.1rem;
-  line-height: 1.6;
+  margin: 1rem 0 1.6rem;
+  font-size: 1.08rem;
+  line-height: 1.75;
+  max-width: 58ch;
 }
 
 .letter {
-  margin: 0.6rem 0 1.6rem;
-  padding: 1.2rem 1.1rem;
-  border-radius: 16px;
-  border: 1px solid rgba(194, 70, 94, 0.24);
-  background: linear-gradient(160deg, rgba(255, 247, 249, 0.95), rgba(255, 241, 244, 0.78));
-  box-shadow: 0 10px 26px rgba(139, 39, 72, 0.12);
+  margin: 0.8rem 0 1.7rem;
+  padding: 1.35rem 1.2rem;
+  border-radius: 22px;
+  border: 1px solid rgba(194, 70, 94, 0.14);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(255, 244, 247, 0.08));
+  box-shadow: 0 12px 28px rgba(114, 35, 60, 0.08);
 }
 
 .letter h2 {
   margin: 0 0 0.7rem;
-  font-size: 1.55rem;
+  font-size: 1.4rem;
   color: var(--accent-deep);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .letter p {
   margin: 0;
-  line-height: 1.75;
-  font-size: 1.05rem;
+  line-height: 1.85;
+  font-size: 1.03rem;
 }
 
 .letter p + p {
@@ -131,18 +151,30 @@ h1 {
 
 .appreciation h2 {
   margin: 0 0 0.65rem;
-  font-size: 1.3rem;
+  font-size: 1.15rem;
   color: var(--accent-deep);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 
 .appreciation ul {
   margin: 0;
-  padding-left: 1.2rem;
+  padding: 0;
   line-height: 1.7;
-  background: rgba(255, 255, 255, 0.62);
-  border: 1px solid rgba(194, 70, 94, 0.18);
-  border-radius: 14px;
-  padding: 0.8rem 0.95rem 0.8rem 2rem;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.8rem;
+}
+
+.appreciation li {
+  padding: 0.95rem 1rem;
+  border-radius: 16px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(255, 247, 249, 0.08));
+  border: 1px solid rgba(194, 70, 94, 0.12);
+  box-shadow: 0 8px 18px rgba(114, 35, 60, 0.06);
 }
 
 .gallery {
@@ -151,19 +183,21 @@ h1 {
 
 .gallery h2 {
   margin: 0 0 0.75rem;
-  font-size: 1.3rem;
+  font-size: 1.15rem;
   color: var(--accent-deep);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 
 .photo-grid {
   position: relative;
-  width: min(540px, 100%);
+  width: min(580px, 100%);
   margin: 0 auto;
-  height: 330px;
-  border-radius: 16px;
+  height: 360px;
+  border-radius: 24px;
   overflow: hidden;
-  border: 1px solid rgba(194, 70, 94, 0.3);
-  box-shadow: 0 12px 28px rgba(139, 39, 72, 0.2);
+  border: 1px solid rgba(194, 70, 94, 0.18);
+  box-shadow: 0 14px 34px rgba(139, 39, 72, 0.14);
 }
 
 .photo-card {
@@ -189,22 +223,30 @@ h1 {
   object-fit: cover;
 }
 
+.photo-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 55%, rgba(75, 22, 35, 0.12));
+  pointer-events: none;
+}
+
 .photo-card:hover img {
   transform: scale(1.04);
 }
 
 .notes {
   margin-top: 1.6rem;
-  padding: 1.1rem;
-  border-radius: 16px;
-  background: linear-gradient(165deg, rgba(255, 244, 247, 0.88), rgba(255, 237, 241, 0.75));
-  border: 1px solid rgba(194, 70, 94, 0.2);
+  padding: 1.15rem;
+  border-radius: 20px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(255, 244, 247, 0.08));
+  border: 1px solid rgba(194, 70, 94, 0.16);
 }
 
 .love-note {
-  margin: 0 0 0.9rem;
-  min-height: 2.6em;
-  font-size: 1.1rem;
+  margin: 0 0 0.95rem;
+  min-height: 2.7em;
+  font-size: 1.08rem;
   color: #d1457a;
   transition: opacity 220ms ease;
 }
@@ -230,11 +272,11 @@ button:active {
 }
 
 .signature {
-  margin: 1.5rem 0 0;
+  margin: 1.6rem 0 0;
   font-style: italic;
   text-align: right;
   color: var(--accent-deep);
-  font-size: 1.08rem;
+  font-size: 1.02rem;
 }
 
 .floating-hearts {
@@ -310,12 +352,12 @@ button:active {
 
 @media (max-width: 600px) {
   .card {
-    padding: 1.3rem;
-    border-radius: 18px;
+    padding: 1.15rem;
+    border-radius: 22px;
   }
 
   .photo-grid {
-    height: 260px;
+    height: 280px;
   }
 
   .photo-card img {
